@@ -7,9 +7,11 @@ export default function NavLinks() {
   const pathname = usePathname();
 
   const links = [
-    { name: '📋 Schedule List', href: '/meetings' },
-    { name: '⚡ Auto-Redirect Current', href: '/meetings/current' },
-  ];
+  { name: 'Home', href: '/' },
+  { name: 'All Meetings', href: '/meetings' },
+  { name: 'Current Week', href: '/meetings/current' },
+];
+
 
   return (
     <div className="flex gap-2 bg-slate-200/60 dark:bg-slate-800/60 p-1 rounded-xl">

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import NavLinks from './NavLinks';
 
 export default function Header() {
   const displayDate = "Sunday, May 3, 2026";
@@ -18,26 +19,7 @@ export default function Header() {
           </p>
         </div>
 
-        <nav className="flex items-center gap-4 text-sm font-medium">
-          <Link 
-            href="/" 
-            className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-          >
-            Home
-          </Link>
-          <Link 
-            href="/meetings" 
-            className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-          >
-            All Meetings
-          </Link>
-          <Link 
-            href="/meetings/current" 
-            className="px-3 py-1.5 rounded-lg bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-950/60 transition-all text-xs font-semibold"
-          >
-            Current Week
-          </Link>
-        </nav>
+        <NavLinks />
 
       </div>
     </header>

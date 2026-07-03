@@ -3,7 +3,7 @@ import type { SacramentMeeting } from './types';
 const meetings: SacramentMeeting[] = [
   {
     id: 1,
-    date: '2026-05-03',
+    date: '2026-07-05',
     meetingType: 'regular',
     presiding: 'Bishop Smith',
     conducting: 'Brother Jones',
@@ -18,11 +18,11 @@ const meetings: SacramentMeeting[] = [
     ],
     closingHymn: { number: 31, title: 'O God, Our Help in Ages Past' },
     closingPrayer: 'Brother Davis',
-    announcements: ['Ward temple night: May 10']
+    announcements: ['Ward temple night: July 10']
   },
   {
     id: 2,
-    date: '2026-05-10',
+    date: '2026-07-12',
     meetingType: 'testimony',
     presiding: 'Bishop Smith',
     conducting: 'Brother Jones',
@@ -38,7 +38,7 @@ const meetings: SacramentMeeting[] = [
   },
   {
     id: 3,
-    date: '2026-05-17',
+    date: '2026-07-19',
     meetingType: 'regular',
     presiding: 'President Young (Stake)',
     conducting: 'Bishop Smith',
@@ -57,7 +57,7 @@ const meetings: SacramentMeeting[] = [
   },
   {
     id: 4,
-    date: '2026-05-24',
+    date: '2026-07-26',
     meetingType: 'stake',
     presiding: 'President Young (Stake)',
     conducting: 'President Pratt (Stake Counselor)',
@@ -76,7 +76,7 @@ const meetings: SacramentMeeting[] = [
   },
   {
     id: 5,
-    date: '2026-05-31',
+    date: '2026-08-02',
     meetingType: 'regular',
     presiding: 'Bishop Smith',
     conducting: 'Brother Evans',

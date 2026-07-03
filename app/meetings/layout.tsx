@@ -1,5 +1,4 @@
 import React from 'react';
-import NavLinks from '@/components/NavLinks';
 
 export default function MeetingsLayout({
   children,
@@ -17,10 +16,6 @@ export default function MeetingsLayout({
             Select a weekly program block below to review, configure, or print physical flyers.
           </p>
         </div>
-
-        <nav className="flex gap-2">
-          <NavLinks />
-        </nav>
       </div>
       
       <div>

@@ -5,14 +5,18 @@ export const dynamic = 'force-dynamic';
 
 export default async function CurrentMeetingPage() {
   const today = new Date();
-  
   const dayOfWeek = today.getDay();
-  const sunday = new Date(today);
-  sunday.setDate(today.getDate() - dayOfWeek);
+  
+  const upcomingSunday = new Date(today);
 
-  const yyyy = sunday.getFullYear();
-  const mm = String(sunday.getMonth() + 1).padStart(2, '0');
-  const dd = String(sunday.getDate()).padStart(2, '0');
+  if (dayOfWeek !== 0) {
+    const daysUntilSunday = 7 - dayOfWeek;
+    upcomingSunday.setDate(today.getDate() + daysUntilSunday);
+  }
+
+  const yyyy = upcomingSunday.getFullYear();
+  const mm = String(upcomingSunday.getMonth() + 1).padStart(2, '0');
+  const dd = String(upcomingSunday.getDate()).padStart(2, '0');
   const formattedSunday = `${yyyy}-${mm}-${dd}`;
 
   const matchingMeetings = getMeetings(formattedSunday);
