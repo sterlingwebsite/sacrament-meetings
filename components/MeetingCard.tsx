@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { SacramentMeeting } from '@/lib/types';
 
 interface MeetingCardProps {
@@ -6,14 +5,34 @@ interface MeetingCardProps {
 }
 
 export default function MeetingCard({ meeting }: MeetingCardProps) {
+  const cleanDate = new Date(meeting.date + 'T00:00:00').toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric'
+  });
+
   return (
-    <div className="border p-4 rounded shadow-sm hover:shadow-md transition">
-      <h3 className="font-bold text-lg">{meeting.date}</h3>
-      <p className="text-gray-600 capitalize">Type: {meeting.meetingType}</p>
-      <p className="text-sm">Conducting: {meeting.conducting}</p>
-      <Link href={`/meetings/${meeting.id}`} className="text-blue-600 hover:underline inline-block mt-2">
-        View Program →
-      </Link>
+    <div className="border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow h-full flex flex-col justify-between">
+      <div>
+        <h3 className="font-bold text-slate-900 dark:text-white text-lg tracking-tight">
+          {cleanDate}
+        </h3>
+        
+        <div className="mt-2 space-y-1 text-sm font-medium">
+          <p className="text-slate-600 dark:text-slate-400 capitalize flex justify-between">
+            <span className="text-slate-400 dark:text-slate-500 font-normal">Type:</span> 
+            {meeting.meetingType}
+          </p>
+          <p className="text-slate-600 dark:text-slate-400 flex justify-between">
+            <span className="text-slate-400 dark:text-slate-500 font-normal">Conducting:</span> 
+            {meeting.conducting}
+          </p>
+        </div>
+      </div>
+      
+      <div className="text-xs font-semibold text-blue-600 dark:text-blue-400 mt-4 pt-3 border-t border-slate-100 dark:border-slate-800/60 group-hover:underline">
+        View Program Details →
+      </div>
     </div>
   );
 }

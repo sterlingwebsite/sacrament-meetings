@@ -1,21 +1,44 @@
-import NavLinks from './NavLinks';
+import Link from 'next/link';
 
 export default function Header() {
-  const currentDate = new Date().toLocaleDateString('en-US', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
+  const displayDate = "Sunday, May 3, 2026";
 
   return (
-    <header className="no-print bg-white border-b border-gray-200 sticky top-0 z-50">
+    <header className="print:hidden bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-800 sticky top-0 z-50">
       <div className="max-w-5xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
-        <div>
-          <h1 className="text-xl font-bold text-blue-900 tracking-tight">Oak Hills Ward</h1>
-          <p className="text-xs text-gray-500 font-medium">{currentDate}</p>
+        
+        <div className="text-center sm:text-left">
+          <Link href="/" className="hover:opacity-90 transition-opacity">
+            <h1 className="text-xl font-bold text-blue-900 dark:text-blue-400 tracking-tight">
+              Oak Hills Ward
+            </h1>
+          </Link>
+          <p className="text-xs text-gray-500 dark:text-slate-400 font-medium mt-0.5">
+            {displayDate}
+          </p>
         </div>
-        <NavLinks />
+
+        <nav className="flex items-center gap-4 text-sm font-medium">
+          <Link 
+            href="/" 
+            className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+          >
+            Home
+          </Link>
+          <Link 
+            href="/meetings" 
+            className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+          >
+            All Meetings
+          </Link>
+          <Link 
+            href="/meetings/current" 
+            className="px-3 py-1.5 rounded-lg bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-950/60 transition-all text-xs font-semibold"
+          >
+            Current Week
+          </Link>
+        </nav>
+
       </div>
     </header>
   );

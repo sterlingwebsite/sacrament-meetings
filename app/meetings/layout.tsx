@@ -1,9 +1,5 @@
-import type { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: "Meetings Archive — Sacrament Planner",
-  description: "Browse historical and planned sacrament meeting layout configurations.",
-};
+import React from 'react';
+import NavLinks from '@/components/NavLinks';
 
 export default function MeetingsLayout({
   children,
@@ -12,7 +8,7 @@ export default function MeetingsLayout({
 }>) {
   return (
     <div className="space-y-6">
-      <div className="no-print bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+      <div className="print:hidden bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 flex flex-col sm:flex-row justify-between items-center gap-3">
         <div className="text-center sm:text-left">
           <h2 className="text-sm font-bold text-slate-900 dark:text-slate-100">
             Sacrament Meeting Archives
@@ -21,6 +17,10 @@ export default function MeetingsLayout({
             Select a weekly program block below to review, configure, or print physical flyers.
           </p>
         </div>
+
+        <nav className="flex gap-2">
+          <NavLinks />
+        </nav>
       </div>
       
       <div>

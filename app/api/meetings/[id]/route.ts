@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getMeetingById } from '@/lib/meetings-db';
-import { SacramentMeeting } from '@/lib/types';
 
 interface RouteParams {
   params: Promise<{ id: string }>;
@@ -9,18 +8,24 @@ interface RouteParams {
 export async function GET(
   request: NextRequest,
   { params }: RouteParams
-): Promise<NextResponse<SacramentMeeting | { error: string }>> {
+): Promise<Response> {
   const { id } = await params;
-  const numericId = parseInt(id, 10);
 
-  if (isNaN(numericId)) {
-    return NextResponse.json({ error: 'Invalid ID format' }, { status: 400 });
+  if (!/^\d+$/.test(id)) {
+    return NextResponse.json(
+      { error: 'id parameter is not a valid number' }, 
+      { status: 400 }
+    );
   }
 
-  const meeting: SacramentMeeting | null = getMeetingById(numericId);
+  const numericId = parseInt(id, 10);
+  const meeting = getMeetingById(numericId);
 
   if (!meeting) {
-    return NextResponse.json({ error: 'Meeting not found' }, { status: 404 });
+    return NextResponse.json(
+      { error: 'No meeting with the given ID exists' }, 
+      { status: 404 }
+    );
   }
 
   return NextResponse.json(meeting);

@@ -96,9 +96,12 @@ const meetings: SacramentMeeting[] = [
   }
 ];
 
-export function getMeetings(date?: string | null): SacramentMeeting[] {
-  if (date) return meetings.filter(m => m.date === date);
-  return meetings;
+export function getMeetings(date?: string | string[] | null): SacramentMeeting[] {
+  if (!date) return meetings;
+  
+  const targetDate = Array.isArray(date) ? date[0] : date;
+  
+  return meetings.filter(m => m.date === targetDate);
 }
 
 export function getMeetingById(id: number): SacramentMeeting | null {

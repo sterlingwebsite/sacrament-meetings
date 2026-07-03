@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { getMeetings } from '@/lib/meetings-db';
-import { SacramentMeeting } from '@/lib/types';
 
-export async function GET(request: NextRequest): Promise<NextResponse<SacramentMeeting[]>> {
-  const date = request.nextUrl.searchParams.get('date');
-  const meetings: SacramentMeeting[] = getMeetings(date);
+export async function GET(request: NextRequest): Promise<Response> {
+  const date = new URL(request.url).searchParams.get('date');
   
-  return NextResponse.json(meetings);
+  const meetings = getMeetings(date);
+  
+  return Response.json(meetings);
 }

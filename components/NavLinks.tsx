@@ -1,4 +1,3 @@
-'use strict';
 'use client';
 
 import Link from 'next/link';
@@ -8,27 +7,29 @@ export default function NavLinks() {
   const pathname = usePathname();
 
   const links = [
-    { name: 'Home', href: '/' },
-    { name: 'All Meetings', href: '/meetings' },
-    { name: 'Current Week', href: '/meetings/current' },
+    { name: '📋 Schedule List', href: '/meetings' },
+    { name: '⚡ Auto-Redirect Current', href: '/meetings/current' },
   ];
 
   return (
-    <nav className="flex gap-6">
+    <div className="flex gap-2 bg-slate-200/60 dark:bg-slate-800/60 p-1 rounded-xl">
       {links.map((link) => {
-        const isActive = pathname === link.href || (link.href === '/meetings' && pathname.startsWith('/meetings/'));
+        const isActive = pathname === link.href;
+
         return (
           <Link
             key={link.href}
             href={link.href}
-            className={`text-sm font-medium transition-colors hover:text-blue-600 ${
-              isActive ? 'text-blue-800 font-bold underline underline-offset-4' : 'text-gray-600'
+            className={`text-xs font-semibold px-3 py-1.5 rounded-lg transition-all ${
+              isActive 
+                ? 'bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-sm' 
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
             }`}
           >
             {link.name}
           </Link>
         );
       })}
-    </nav>
+    </div>
   );
 }
