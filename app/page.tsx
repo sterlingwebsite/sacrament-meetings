@@ -36,7 +36,7 @@ export default function Home() {
         <div className="relative flex justify-center lg:justify-end">
           <div className="relative w-full max-w-[450px] aspect-square rounded-2xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900">
             <Image
-              src="https://unsplash.com"
+              src="https://images.unsplash.com/photo-1519751151747-4d64b9715122?auto=format&fit=crop&w=800&q=80"
               alt="An organized notebook open on a table next to a planner pen, representing structured agenda management"
               fill
               priority
@@ -45,6 +45,7 @@ export default function Home() {
             />
           </div>
         </div>
+
 
       </div>
     </div>
