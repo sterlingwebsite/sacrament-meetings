@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import MeetingDetail from '@/components/MeetingDetail';
-import { SacramentMeeting } from '@/lib/types';
+import { getMeetingById } from '@/lib/meetings-db';
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -8,16 +8,17 @@ interface PageProps {
 
 export default async function MeetingDetailPage({ params }: PageProps) {
   const { id } = await params;
+  const numericId = parseInt(id, 10);
 
-  const res = await fetch(`http://localhost:3000/api/meetings/${id}`, {
-    cache: 'no-store'
-  });
-
-  if (!res.ok) {
+  if (isNaN(numericId)) {
     notFound();
   }
 
-  const meeting: SacramentMeeting = await res.json();
+  const meeting = getMeetingById(numericId);
+
+  if (!meeting) {
+    notFound();
+  }
 
   return (
     <main className="container mx-auto p-6 max-w-3xl">

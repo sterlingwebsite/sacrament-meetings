@@ -1,21 +1,9 @@
 import Link from 'next/link';
 import MeetingCard from '@/components/MeetingCard';
-import { SacramentMeeting } from '@/lib/types';
+import { getMeetings } from '@/lib/meetings-db';
 
 export default async function MeetingsPage() {
-  const res = await fetch('http://localhost:3000/api/meetings', {
-    cache: 'no-store',
-  });
-
-  if (!res.ok) {
-    return (
-      <div className="text-center p-6 text-red-500 font-semibold">
-        Failed to load sacrament meeting configurations.
-      </div>
-    );
-  }
-
-  const meetings: SacramentMeeting[] = await res.json();
+  const meetings = getMeetings();
 
   return (
     <main className="space-y-6">
@@ -36,7 +24,7 @@ export default async function MeetingsPage() {
             <Link 
               key={meeting.id} 
               href={`/meetings/${meeting.id}`}
-              className="transition transform hover:-translate-y-0.5"
+              className="transition transform hover:-translate-y-0.5 group"
             >
               <MeetingCard meeting={meeting} />
             </Link>
