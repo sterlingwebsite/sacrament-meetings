@@ -18,13 +18,10 @@ export default function NavLinks() {
         let isActive = false;
 
         if (link.href === '/') {
-          // Highlight Home only when exactly on the root page
           isActive = pathname === '/';
         } else if (link.href === '/meetings/current') {
-          // Highlight Current Week on its base link OR when looking at its target page (/meetings/1)
           isActive = pathname === '/meetings/current' || pathname === '/meetings/1';
         } else if (link.href === '/meetings') {
-          // Highlight All Meetings ONLY on the index list page, not when viewing specific items
           isActive = pathname === '/meetings';
         }
 

@@ -24,11 +24,12 @@ export default function Home() {
             >
               View Current Program
             </Link>
+            {/* Updated the button label below from 'Browse Meeting Archives' to 'All Meetings' */}
             <Link
               href="/meetings"
               className="flex h-12 items-center justify-center rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-6 font-semibold text-slate-700 dark:text-slate-300 transition-all hover:bg-slate-50 dark:hover:bg-slate-800"
             >
-              Browse Meeting Archives
+              All Meetings
             </Link>
           </div>
         </div>
@@ -45,7 +46,6 @@ export default function Home() {
             />
           </div>
         </div>
-
 
       </div>
     </div>
