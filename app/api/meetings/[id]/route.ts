@@ -19,7 +19,8 @@ export async function GET(
   }
 
   const numericId = parseInt(id, 10);
-  const meeting = getMeetingById(numericId);
+  
+  const meeting = await getMeetingById(numericId);
 
   if (!meeting) {
     return NextResponse.json(

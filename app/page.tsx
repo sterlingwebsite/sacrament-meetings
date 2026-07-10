@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
@@ -24,7 +23,6 @@ export default function Home() {
             >
               View Current Program
             </Link>
-            {/* Updated the button label below from 'Browse Meeting Archives' to 'All Meetings' */}
             <Link
               href="/meetings"
               className="flex h-12 items-center justify-center rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-6 font-semibold text-slate-700 dark:text-slate-300 transition-all hover:bg-slate-50 dark:hover:bg-slate-800"
@@ -36,13 +34,10 @@ export default function Home() {
 
         <div className="relative flex justify-center lg:justify-end">
           <div className="relative w-full max-w-[450px] aspect-square rounded-2xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900">
-            <Image
+            <img
               src="/chapel.jpg" 
               alt="An LDS chapel"
-              fill
-              priority
-              className="object-cover transition-opacity duration-300"
-              sizes="(max-w-768px) 100vw, 450px"
+              className="w-full h-full object-cover transition-opacity duration-300"
             />
           </div>
         </div>
