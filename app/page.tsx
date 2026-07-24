@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from "next/link";
 
 export default function Home() {
@@ -34,9 +35,11 @@ export default function Home() {
 
         <div className="relative flex justify-center lg:justify-end">
           <div className="relative w-full max-w-[450px] aspect-square rounded-2xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900">
-            <img
+            <Image
               src="/chapel.jpg" 
               alt="An LDS chapel"
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="w-full h-full object-cover transition-opacity duration-300"
             />
           </div>

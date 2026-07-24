@@ -1,4 +1,8 @@
+"use client";
+
+import Link from 'next/link';
 import { SacramentMeeting } from '@/lib/types';
+import { DeleteButton } from './DeleteButton';
 
 interface MeetingCardProps {
   meeting: SacramentMeeting;
@@ -30,8 +34,27 @@ export default function MeetingCard({ meeting }: MeetingCardProps) {
         </div>
       </div>
       
-      <div className="text-xs font-semibold text-blue-600 dark:text-blue-400 mt-4 pt-3 border-t border-slate-100 dark:border-slate-800/60 group-hover:underline">
-        View Program Details →
+      <div className="mt-5 pt-3 border-t border-slate-100 dark:border-slate-800/60 flex items-center justify-between gap-2">
+        
+        <Link 
+          href={`/meetings/${meeting.id}`}
+          className="text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline"
+        >
+          View Program Details →
+        </Link>
+
+        <div className="flex items-center gap-2 print:hidden">
+          
+          <Link
+            href={`/meetings/${meeting.id}/edit`}
+            className="inline-flex h-9 items-center justify-center rounded-lg bg-slate-50 hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700 px-3 text-xs font-semibold text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition-colors"
+          >
+            ✏️ Edit
+          </Link>
+
+          <DeleteButton id={meeting.id} />
+        </div>
+
       </div>
     </div>
   );

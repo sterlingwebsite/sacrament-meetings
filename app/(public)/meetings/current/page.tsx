@@ -1,4 +1,4 @@
-import { redirect, notFound } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import { neon } from '@neondatabase/serverless';
 
 export const dynamic = 'force-dynamic';

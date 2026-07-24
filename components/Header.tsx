@@ -2,7 +2,13 @@ import Link from 'next/link';
 import NavLinks from './NavLinks';
 
 export default function Header() {
-  const displayDate = "Sunday, May 3, 2026";
+  const options: Intl.DateTimeFormatOptions = { 
+    weekday: 'long', 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+  };
+  const displayDate = new Date().toLocaleDateString('en-US', options);
 
   return (
     <header className="print:hidden bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-800 sticky top-0 z-50">
@@ -14,7 +20,10 @@ export default function Header() {
               Oak Hills Ward
             </h1>
           </Link>
-          <p className="text-xs text-gray-500 dark:text-slate-400 font-medium mt-0.5">
+          <p 
+            suppressHydrationWarning 
+            className="text-xs text-gray-500 dark:text-slate-400 font-medium mt-0.5"
+          >
             {displayDate}
           </p>
         </div>

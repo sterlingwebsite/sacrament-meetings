@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import MeetingCard from '@/components/MeetingCard';
 import { MeetingSearch } from '@/components/MeetingSearch';
 import { Pagination } from '@/components/Pagination';
@@ -40,15 +39,10 @@ export default async function MeetingsPage({ searchParams }: PageProps) {
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {meetings.map((meeting) => (
-            <Link 
-              key={meeting.id} 
-              href={`/meetings/${meeting.id}`}
-              className="transition transform hover:-translate-y-0.5 group"
-            >
-              <MeetingCard meeting={meeting} />
-            </Link>
+            <MeetingCard key={meeting.id} meeting={meeting} />
           ))}
         </div>
+
       )}
 
       <div className="pt-4 flex justify-center border-t border-slate-100 dark:border-slate-800 print:hidden">
