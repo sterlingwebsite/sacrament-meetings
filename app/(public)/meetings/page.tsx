@@ -1,7 +1,13 @@
+import type { Metadata } from 'next';
 import MeetingCard from '@/components/MeetingCard';
 import { MeetingSearch } from '@/components/MeetingSearch';
 import { Pagination } from '@/components/Pagination';
 import { getMeetings, getMeetingsTotalPages } from '@/lib/meetings-db';
+
+export const metadata: Metadata = {
+  title: "Scheduled Services",
+  description: "Browse past, upcoming, and archived ward sacrament meeting schedules and agendas.",
+};
 
 interface PageProps {
   searchParams: Promise<{ query?: string; page?: string }>;

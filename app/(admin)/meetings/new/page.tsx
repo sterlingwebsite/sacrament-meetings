@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import Link from "next/link";
 import { createMeetingAction, FormState } from "@/lib/actions";
 
@@ -8,6 +8,10 @@ const initialState: FormState = { message: null, errors: {} };
 
 export default function NewMeetingPage() {
   const [state, formAction, isPending] = useActionState(createMeetingAction, initialState);
+
+  useEffect(() => {
+    document.title = "Create Meeting Planner | Sacrament Planner";
+  }, []);
 
   return (
     <main className="max-w-3xl mx-auto py-12 px-4">
@@ -114,19 +118,17 @@ export default function NewMeetingPage() {
                 name="speakers" 
                 placeholder={`Speaker: Brother Santos - Temple Covenants\nMusic: Ward Choir - Consider the Lilies`}
                 rows={6} 
-                className="w-full p-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-transparent text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" 
+                className="w-full p-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-transparent text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-blue-500" 
               />
             </div>
           </div>
 
           <div className="flex justify-end gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
-            <Link href="/meetings" className="h-10 px-4 inline-flex items-center justify-center rounded-lg border border-slate-300 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50">Cancel</Link>
-            <button 
-              type="submit" 
-              disabled={isPending} 
-              className="h-10 px-4 inline-flex items-center justify-center rounded-lg bg-blue-600 font-semibold text-white hover:bg-blue-700 disabled:bg-slate-300"
-            >
-              {isPending ? "Creating Agenda..." : "Create New Meeting"}
+            <Link href="/meetings" className="inline-flex h-10 items-center justify-center rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 transition-colors">
+              Cancel
+            </Link>
+            <button type="submit" disabled={isPending} className="inline-flex h-10 items-center justify-center rounded-xl bg-blue-600 px-5 text-sm font-semibold text-white shadow-lg shadow-blue-500/10 hover:bg-blue-700 transition-all disabled:opacity-50">
+              {isPending ? "Saving..." : "Create Planner"}
             </button>
           </div>
 

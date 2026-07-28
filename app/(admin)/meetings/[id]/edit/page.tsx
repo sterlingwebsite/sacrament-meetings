@@ -1,9 +1,25 @@
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getMeetingById } from '@/lib/meetings-db';
 import EditFormWrapper from './EditFormWrapper';
 
 interface EditPageProps {
   params: Promise<{ id: string }>;
+}
+
+export async function generateMetadata({ params }: EditPageProps): Promise<Metadata> {
+  const resolvedParams = await params;
+  const numericId = parseInt(resolvedParams.id, 10);
+  
+  if (isNaN(numericId)) return { title: "Edit Meeting" };
+  
+  const meeting = await getMeetingById(numericId);
+  if (!meeting) return { title: "Meeting Not Found" };
+
+  return {
+    title: `Edit Agenda (${meeting.date})`,
+    description: `Modify the sacrament meeting agenda assignments for ${meeting.date}.`,
+  };
 }
 
 export default async function EditMeetingPage({ params }: EditPageProps) {

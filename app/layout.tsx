@@ -10,8 +10,18 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Sacrament Meeting Planner",
+  title: {
+    default: "Sacrament Meeting Planner",
+    template: "%s | Sacrament Planner",
+  },
   description: "Plan, organize, and print weekly Sacrament Meeting programs.",
+  openGraph: {
+    title: "Sacrament Meeting Planner",
+    description: "Plan, organize, and print weekly Sacrament Meeting programs.",
+    siteName: "Sacrament Meeting Planner",
+    locale: "en_US",
+    type: "website",
+  },
 };
 
 export default function RootLayout({

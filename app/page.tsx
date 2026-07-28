@@ -1,5 +1,10 @@
+import type { Metadata } from "next";
 import Image from 'next/image';
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  description: "Efficiently manage agendas, track ward business, organize speakers, and generate beautifully formatted print programs for ward members.",
+};
 
 export default function Home() {
   return (
@@ -8,7 +13,7 @@ export default function Home() {
         
         <div className="space-y-6 text-center lg:text-left">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-400 text-xs font-semibold tracking-wide">
-            📅 Ward Administration Tool
+            Ward Administration Tool
           </div>
           <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
             Simplify Your Weekly Sacrament Planning

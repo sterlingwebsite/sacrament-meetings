@@ -1,9 +1,25 @@
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import MeetingDetail from '@/components/MeetingDetail';
 import { getMeetingById } from '@/lib/meetings-db';
 
 interface PageProps {
   params: Promise<{ id: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { id } = await params;
+  const numericId = parseInt(id, 10);
+  
+  if (isNaN(numericId)) return { title: "Meeting Program" };
+  
+  const meeting = await getMeetingById(numericId);
+  if (!meeting) return { title: "Program Not Found" };
+
+  return {
+    title: `Program - ${meeting.date}`,
+    description: `View the weekly ward sacrament meeting print agenda, speakers, and service schedule for ${meeting.date}.`,
+  };
 }
 
 export default async function MeetingDetailPage({ params }: PageProps) {

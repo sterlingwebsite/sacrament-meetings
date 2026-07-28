@@ -5,6 +5,17 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { addMeeting, updateMeeting, deleteMeeting } from "@/lib/meetings-db";
 import type { MeetingType, Hymn, SpeakerItem } from "@/lib/types";
+import { signIn } from "@/auth";
+import { auth } from "@/auth";
+import { AuthError } from "next-auth";
+
+async function requireAdminSession() {
+  const session = await auth();
+  if (!session?.user) {
+    throw new Error("Not authenticated. Operation denied.");
+  }
+  return session;
+}
 
 function parseHymnString(input: string | null | undefined): Hymn {
   if (!input) return { number: 0, title: "" };
@@ -44,6 +55,8 @@ export type FormState = {
 };
 
 export async function createMeetingAction(prevState: FormState, formData: FormData): Promise<FormState> {
+  await requireAdminSession();
+
   const validatedFields = MeetingFormSchema.safeParse({
     date: formData.get("date"),
     meetingType: formData.get("meetingType"),
@@ -118,6 +131,8 @@ export async function createMeetingAction(prevState: FormState, formData: FormDa
 }
 
 export async function updateMeetingAction(id: number, prevState: FormState, formData: FormData): Promise<FormState> {
+  await requireAdminSession();
+
   const validatedFields = MeetingFormSchema.safeParse({
     date: formData.get("date"),
     meetingType: formData.get("meetingType"),
@@ -195,11 +210,37 @@ export async function updateMeetingAction(id: number, prevState: FormState, form
 }
 
 export async function deleteMeetingAction(id: number) {
+  const session = await auth();
+  if (!session?.user) {
+    redirect("/login");
+  }
+
   try {
     await deleteMeeting(id);
-    revalidatePath("/meetings");
   } catch (error) {
     console.error("Database Error:", error);
     throw error;
+  }
+
+  revalidatePath("/meetings");
+  redirect("/meetings");
+}
+
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData,
+) {
+  try {
+    await signIn("credentials", formData);
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case "CredentialsSignin":
+          return "Invalid email or password.";
+        default:
+          return "Something went wrong.";
+      }
+    }
+    throw error; 
   }
 }
