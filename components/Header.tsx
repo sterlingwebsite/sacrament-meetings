@@ -1,7 +1,12 @@
 import Link from 'next/link';
 import NavLinks from './NavLinks';
+import { auth } from '@/auth';
+import { SignOutButton } from './sign-out-button';
 
-export default function Header() {
+export default async function Header() {
+  const session = await auth();
+  const isLoggedIn = !!session?.user;
+
   const options: Intl.DateTimeFormatOptions = { 
     weekday: 'long', 
     year: 'numeric', 
@@ -28,7 +33,27 @@ export default function Header() {
           </p>
         </div>
 
-        <NavLinks />
+        <div className="flex items-center gap-5">
+          <NavLinks />
+          
+          <div className="h-4 w-px bg-gray-200 dark:bg-slate-800 hidden sm:block" />
+
+          {isLoggedIn ? (
+            <div className="flex items-center gap-3">
+              <span className="text-xs text-slate-500 hidden md:inline max-w-[120px] truncate">
+                {session?.user?.name}
+              </span>
+              <SignOutButton />
+            </div>
+          ) : (
+            <Link 
+              href="/login" 
+              className="inline-flex h-8 items-center justify-center rounded-lg bg-blue-50 hover:bg-blue-100 dark:bg-blue-950/40 px-3 text-xs font-semibold text-blue-700 dark:text-blue-400 border border-blue-200/60 dark:border-blue-900/30 transition-colors"
+            >
+              Sign In
+            </Link>
+          )}
+        </div>
 
       </div>
     </header>

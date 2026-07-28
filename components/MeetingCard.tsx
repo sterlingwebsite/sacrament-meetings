@@ -6,9 +6,10 @@ import { DeleteButton } from './DeleteButton';
 
 interface MeetingCardProps {
   meeting: SacramentMeeting;
+  isAdmin?: boolean;
 }
 
-export default function MeetingCard({ meeting }: MeetingCardProps) {
+export default function MeetingCard({ meeting, isAdmin = false }: MeetingCardProps) {
   const cleanDate = new Date(meeting.date + 'T00:00:00').toLocaleDateString('en-US', {
     month: 'long',
     day: 'numeric',
@@ -43,17 +44,18 @@ export default function MeetingCard({ meeting }: MeetingCardProps) {
           View Program Details →
         </Link>
 
-        <div className="flex items-center gap-2 print:hidden">
-          
-          <Link
-            href={`/meetings/${meeting.id}/edit`}
-            className="inline-flex h-9 items-center justify-center rounded-lg bg-slate-50 hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700 px-3 text-xs font-semibold text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition-colors"
-          >
-            ✏️ Edit
-          </Link>
+        {isAdmin && (
+          <div className="flex items-center gap-2 print:hidden">
+            <Link
+              href={`/meetings/${meeting.id}/edit`}
+              className="inline-flex h-9 items-center justify-center rounded-lg bg-slate-50 hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700 px-3 text-xs font-semibold text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition-colors"
+            >
+              Edit
+            </Link>
 
-          <DeleteButton id={meeting.id} />
-        </div>
+            <DeleteButton id={meeting.id} />
+          </div>
+        )}
 
       </div>
     </div>
